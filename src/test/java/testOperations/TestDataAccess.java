@@ -134,6 +134,16 @@ public class TestDataAccess {
 
 		}
 
+		public void setActiveRide(boolean status){
+			System.out.println(">> TestDataAccess: setActiveRide");
+			Driver d = db.find(Driver.class, "Driver Test");
+			if (d!=null) {
+				db.getTransaction().begin();
+				d.getCreatedRides().get(0).setActive(status);
+				db.getTransaction().commit();
+			}
+		}
+
 
 		
 }
