@@ -13,11 +13,11 @@ import domain.Ride;
 import testOperations.TestDataAccess;
 
 public class GetRidesByDriverBDWhiteTest {
-    	 //sut:system under test
-	 static DataAccess sut=new DataAccess();
+    //sut:system under test
+	static DataAccess sut=new DataAccess();
 	 
-	 //additional operations needed to execute the test 
-	 static TestDataAccess testDA=new TestDataAccess();
+	//additional operations needed to execute the test 
+	static TestDataAccess testDA=new TestDataAccess();
 
 	@SuppressWarnings("unused")
 	private Driver driver; 
