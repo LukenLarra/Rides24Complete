@@ -29,6 +29,7 @@ public class CreateRideMockTest {
 	@Mock
 	protected EntityTransaction et;
 	
+	
 	@Before
 	public void init() {
 		MockitoAnnotations.openMocks(this);
