@@ -32,7 +32,7 @@ public class GetRidesByDriverBDBlackTest {
             //invoke System Under Test (sut)  
             sut.open();
             List<Ride> result =sut.getRidesByDriver(driverUsername);
-            
+            sut.close();
             //verify the results
             assertNull(result);
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class GetRidesByDriverBDBlackTest {
 
             // Invoke System Under Test (sut)
             List<Ride> result = sut.getRidesByDriver(username);
-
+            sut.close();
             // Verify the results
             assertNotNull(result);
             assertTrue(result.isEmpty());
@@ -84,7 +84,7 @@ public class GetRidesByDriverBDBlackTest {
 
             // Invoke System Under Test (sut)
             List<Ride> result = sut.getRidesByDriver(username);
-
+            sut.close();
             // Verify the results
             assertNotNull(result);
             assertTrue(result.isEmpty());
@@ -115,7 +115,7 @@ public class GetRidesByDriverBDBlackTest {
 
             // Invoke System Under Test (sut)
             List<Ride> result = sut.getRidesByDriver(username);
-
+            sut.close();
             // Verify the results
             assertNotNull(result);
             assertTrue(!result.isEmpty());
@@ -140,7 +140,7 @@ public class GetRidesByDriverBDBlackTest {
             //invoke System Under Test (sut)  
             sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
-            
+            sut.close();   
             //verify the results
             assertNull(result);
         } catch (Exception e) {
