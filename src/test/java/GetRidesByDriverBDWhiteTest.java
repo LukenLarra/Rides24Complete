@@ -29,11 +29,10 @@ public class GetRidesByDriverBDWhiteTest {
             //define parameters
             String driverUsername="Driver Test";
 
-            //invoke System Under Test (sut)  
             sut.open();
             List<Ride> result =sut.getRidesByDriver(driverUsername);
             sut.close();    
-            //verify the results
+
             assertNull(result);
         } catch (Exception e) {
             fail();
@@ -51,16 +50,14 @@ public class GetRidesByDriverBDWhiteTest {
             testDA.createDriver(username,"123"); // Añadir un conductor sin viajes
             testDA.close();
 
-            // Invoke System Under Test (sut)
             List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
-            // Verify the results
+
             assertNotNull(result);
             assertTrue(result.isEmpty());
         } catch (Exception e) {
             fail("An exception was thrown: " + e.getMessage());
         } finally {
-            // Clean up the database
             testDA.open();
             testDA.removeDriver(username); // Eliminar el conductor de prueba
             testDA.close();
