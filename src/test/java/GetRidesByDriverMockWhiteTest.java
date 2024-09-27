@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -57,12 +58,12 @@ public class GetRidesByDriverMockWhiteTest {
     //sut.getRidesByDriver: The username doesnt fit any driver in the database. The test must return null. If  an Exception is returned the getRidesByDriver method is not well implemented.
     public void test1() {
         try {
-            String driverUsername="Driver Test";
+            String username="Driver Test";
 
-            Mockito.when(db.find(Driver.class, driverUsername)).thenReturn(null);
+            Mockito.when(db.find(Driver.class, username)).thenReturn(null);
             
             sut.open();
-            List<Ride> result = sut.getRidesByDriver(driverUsername);
+            List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
             assertNull(result);
 
@@ -77,8 +78,7 @@ public class GetRidesByDriverMockWhiteTest {
         String username = "Driver Test";
         try {
             
-            driver = new Driver(username, "123");         
-            //subir el driver a la base de datos de mockito
+            driver = new Driver(username, "123");
 
             Mockito.when(db.find(Driver.class, username)).thenReturn(driver);
             
@@ -91,6 +91,28 @@ public class GetRidesByDriverMockWhiteTest {
         } catch (Exception e) {
             fail();
         }
+    }
+
+    @Test
+    //sut.getRidesByDriver:  The username fits a driver in the database and it has rides but no active ones. The test must return a list of activeRides. If  an Exception is returned the getRidesByDriver method is not well implemented.
+    public void test3() {
+        String username = "Driver Test";
+        String from = "Donostia";
+        String to = "Zarautz";
+        Date date = new java.util.Date();
+        try {
+            // Inicializar la base de datos con datos de prueba
+            sut.open();
+
+            // Invoke System Under Test (sut)
+            List<Ride> result = sut.getRidesByDriver(username);
+            sut.close();
+            // Verify the results
+            assertNotNull(result);
+            assertTrue(result.isEmpty());
+        } catch (Exception e) {
+            fail("An exception was thrown: " + e.getMessage());
+        }    
     }
 
 
