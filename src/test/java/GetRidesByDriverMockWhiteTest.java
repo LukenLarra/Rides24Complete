@@ -25,7 +25,7 @@ import dataAccess.DataAccess;
 import domain.Driver;
 import domain.Ride;
 
-
+@SuppressWarnings("unchecked")
 public class GetRidesByDriverMockWhiteTest {
     
     static DataAccess sut;
@@ -79,20 +79,17 @@ public class GetRidesByDriverMockWhiteTest {
             fail();
         }
     }
-
+	
     @Test
     //sut.getRidesByDriver:  The username fits a driver in the database but it doesnt have any ride. The test must return an empty list of activeRides. If  an Exception is returned the getRidesByDriver method is not well implemented.
     public void test2() {
         try {
             String username="Driver Test";
             driver = new Driver(username, "123");
-            List<Ride> rides = new ArrayList<>();
 
-            when(db.createQuery("SELECT d FROM Driver d WHERE d.username = :username", Driver.class)).thenReturn(query);
-            when(query.setParameter("username", username)).thenReturn(query);  // Simular que el parámetro se establece correctamente
-            when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username
-            when(driver.getCreatedRides()).thenReturn(rides);  // Simular que el driver no tiene rides
-
+            Mockito.when(db.createQuery(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(query);		
+            Mockito.when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username
+            
             sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
@@ -101,9 +98,7 @@ public class GetRidesByDriverMockWhiteTest {
             assertTrue(result.isEmpty()); 
         } catch (Exception e) {
             fail();
-        }
-
-        
+        }   
     }
 
     @Test
@@ -121,12 +116,9 @@ public class GetRidesByDriverMockWhiteTest {
             rides.add(ride);
             driver.setCreatedRides(rides);
             
-            when(db.createQuery("SELECT d FROM Driver d WHERE d.username = :username", Driver.class)).thenReturn(query);
-            when(query.setParameter("username", username)).thenReturn(query);  // Simular que el parámetro se establece correctamente
-            when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username
-            when(driver.getCreatedRides()).thenReturn(rides);  // Simular que el driver no tiene rides
-            when(rides.get(0).isActive()).thenReturn(false);  // Simular que el ride no está activo
-
+            Mockito.when(db.createQuery(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(query);		
+            Mockito.when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username
+            
             sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
@@ -136,7 +128,6 @@ public class GetRidesByDriverMockWhiteTest {
         } catch (Exception e) {
             fail();
         }
-        
     }
 
     @Test
@@ -153,11 +144,8 @@ public class GetRidesByDriverMockWhiteTest {
             rides.add(ride);
             driver.setCreatedRides(rides);
             
-            when(db.createQuery("SELECT d FROM Driver d WHERE d.username = :username", Driver.class)).thenReturn(query);
-            when(query.setParameter("username", username)).thenReturn(query);  // Simular que el parámetro se establece correctamente
-            when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username
-            when(driver.getCreatedRides()).thenReturn(rides);  // Simular que el driver no tiene rides
-            when(rides.get(0).isActive()).thenReturn(true);  // Simular que el ride no está activo
+            Mockito.when(db.createQuery(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(query);		
+            Mockito.when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username
             
             sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
@@ -168,6 +156,5 @@ public class GetRidesByDriverMockWhiteTest {
         } catch (Exception e) {
             fail();
         }
-    
     }
 }
