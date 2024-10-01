@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -56,6 +57,11 @@ public class Admin2 implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+  	public int hashCode() {
+		return username.hashCode();
+  	}
 
 	public String getMota() {
 		return mota;
