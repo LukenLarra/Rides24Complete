@@ -33,6 +33,11 @@
 				</execution>
 			</executions>
 		</plugin>
+		<plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.9.1.2184</version>
+        </plugin>
    </plugins>
 </build>
  <repositories>
@@ -50,6 +55,8 @@
 	<sonar.projectKey>LukenLarra_Rides24Complete</sonar.projectKey>
 	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	<sonar.login>d716dbb2ac2acb928c850d61362a5a2f5c937611</sonar.login>
+	<sonar.sources>src</sonar.sources>
+	<sonar.tests>src/test</sonar.tests>
 </properties>
 
 <!-- https://mvnrepository.com/artifact/junit/junit -->
