@@ -251,7 +251,6 @@ public class DataAccess {
 
 			return ride;
 		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
 			return null;
 		}
 		
