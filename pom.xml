@@ -46,9 +46,9 @@
 <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
-	<sonar.organization>lukenlarra-gitHub</sonar.organization>
-	<sonar.projectKey>lukenlarra-gitHub_Rides24Complete</sonar.projectKey>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	<sonar.organization>lukenlarra-github</sonar.organization>
+	<sonar.projectKey>lukenlarra_Rides24Complete</sonar.projectKey>
+	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	<sonar.login>d716dbb2ac2acb928c850d61362a5a2f5c937611</sonar.login>
 </properties>
 
