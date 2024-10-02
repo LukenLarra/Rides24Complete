@@ -1,6 +1,8 @@
 package dataAccess;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +18,16 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
-import domain.*;
+import domain.Alert;
+import domain.Booking;
+import domain.Car;
+import domain.Complaint;
+import domain.Discount;
+import domain.Driver;
+import domain.Movement;
+import domain.Ride;
+import domain.Traveler;
+import domain.User;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
@@ -38,8 +49,12 @@ public class DataAccess {
 			File fileToDelete = new File(fileName);
 			if (fileToDelete.delete()) {
 				File fileToDeleteTemp = new File(fileName + "$");
-				fileToDeleteTemp.delete();
-
+				try {
+					Files.delete(fileToDeleteTemp.toPath());
+					System.out.println("Temporary file deleted");
+				} catch (IOException e) {
+					System.out.println("Failed to delete temporary file: " + e.getMessage());
+				}
 				System.out.println("File deleted");
 			} else {
 				System.out.println("Operation failed");
