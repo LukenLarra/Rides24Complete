@@ -1,3 +1,4 @@
+package tests;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,11 @@ import org.junit.Test;
 import dataAccess.DataAccess;
 import domain.Driver;
 import domain.Ride;
+import domain.Booking;
+import domain.Traveler;
 import testOperations.TestDataAccess;
 
-public class GetRidesByDriverBDBlackTest {
+public class GetBookingFromDriverBDWhiteTest {
     //sut:system under test
 	static DataAccess sut=new DataAccess();
 	 
@@ -23,58 +26,64 @@ public class GetRidesByDriverBDBlackTest {
 	private Driver driver; 
 
     @Test  
-    //sut.getRidesByDriver:  The username doesnt fit any driver in the database. The test must return null. If  an Exception is returned the getRidesByDriver method is not well implemented.
+    //sut.getBookingFromDriver:  The username doesnt fit any driver in the database. The test must return null. If an Exception is returned the getBoookingFromDriver method is not well implemented.
     public void test1() {
         try {
+
             //define parameters
             String driverUsername="Driver Test";
 
-            //invoke System Under Test (sut)  
             sut.open();
-            List<Ride> result =sut.getRidesByDriver(driverUsername);
-            sut.close();
-            //verify the results
+            List<Booking> result =sut.getBookingFromDriver(driverUsername);
+            sut.close();    
+
             assertNull(result);
+
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    //sut.getRidesByDriver:  The username fits a driver in the database but it doesnt have any ride. The test must return an empty list of activeRides. If  an Exception is returned the getRidesByDriver method is not well implemented.
+    //sut.getBookingFromDriver:  The username fits a driver in the database but it doesnt have any ride. The test must return an empty list of bookings. If an Exception is returned the getBookingFromDriver method is not well implemented.
     public void test2() {
         String username = "Driver Test";
         try {
+
             // Inicializar la base de datos con datos de prueba
             sut.open();
             testDA.open();
             testDA.createDriver(username,"123"); // Añadir un conductor sin viajes
             testDA.close();
 
-            // Invoke System Under Test (sut)
-            List<Ride> result = sut.getRidesByDriver(username);
+            List<Booking> result = sut.getBookingFromDriver(username);
             sut.close();
-            // Verify the results
+
             assertNotNull(result);
             assertTrue(result.isEmpty());
+
         } catch (Exception e) {
+
             fail("An exception was thrown: " + e.getMessage());
+
         } finally {
-            // Clean up the database
+
             testDA.open();
             testDA.removeDriver(username); // Eliminar el conductor de prueba
             testDA.close();
+
         }
     }
 
     @Test
-    //sut.getRidesByDriver:  The username fits a driver in the database and it has rides but no active ones. The test must return a list of activeRides. If  an Exception is returned the getRidesByDriver method is not well implemented.
+    //sut.getBookingFromDriver:  The username fits a driver in the database and it has rides but no active ones. The test must return a list of empty bookings. If an Exception is returned the getBookingFromDriver method is not well implemented.
     public void test3() {
         String username = "Driver Test";
         String from = "Donostia";
         String to = "Zarautz";
         Date date = new java.util.Date();
         try {
+
             // Inicializar la base de datos con datos de prueba
             sut.open();
             testDA.open();
@@ -83,68 +92,65 @@ public class GetRidesByDriverBDBlackTest {
             testDA.close();
 
             // Invoke System Under Test (sut)
-            List<Ride> result = sut.getRidesByDriver(username);
+            List<Booking> result = sut.getBookingFromDriver(username);
             sut.close();
             // Verify the results
             assertNotNull(result);
             assertTrue(result.isEmpty());
+            
         } catch (Exception e) {
+
             fail("An exception was thrown: " + e.getMessage());
+
         } finally {
+
             // Clean up the database
             testDA.open();
             testDA.removeRide(username, from, to, date); // Eliminar el viaje de prueba
             testDA.removeDriver(username); // Eliminar el conductor de prueba
             testDA.close();
+
         }
     }
 
     @Test
-    //sut.getRidesByDriver:  The username fits a driver in the database and it has rides and active ones. The test must return a list of activeRides. If  an Exception is returned the getRidesByDriver method is not well implemented.
+    //sut.getBookingFromDriver:  The username fits a driver in the database and it has active rides. The test must return a list of bookings. If an Exception is returned the getBookingFromDriver method is not well implemented.
     public void test4() {
+
         String username = "Driver Test";
         String from = "Donostia";
         String to = "Zarautz";
         Date date = new java.util.Date();
+        Traveler traveler = new Traveler(username, "password");
         try {
+
             // Inicializar la base de datos con datos de prueba
             sut.open();
             testDA.open();
+            testDA.createDriver(username, "123"); // Añadir un conductor
             testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje activo
+            testDA.addDriverWithRideAndBooking(username, from, to, date, 2, 10, traveler, 1); // Añadir un viaje activo cn booking
             testDA.close();
 
             // Invoke System Under Test (sut)
-            List<Ride> result = sut.getRidesByDriver(username);
+            List<Booking> result = sut.getBookingFromDriver(username);
             sut.close();
             // Verify the results
             assertNotNull(result);
             assertTrue(!result.isEmpty());
+
         } catch (Exception e) {
+
             fail("An exception was thrown: " + e.getMessage());
+
         } finally {
+
             // Clean up the database
             testDA.open();
             testDA.removeRide(username, from, to, date); // Eliminar el viaje de prueba
             testDA.removeDriver(username); // Eliminar el conductor de prueba
             testDA.close();
-        }
-    }
 
-    @Test
-    //sut.getRidesByDriver:  The username is null. The test must return null. If  an Exception is returned the getRidesByDriver method is not well implemented.
-    public void test5() {
-        try {
-            //define parameters
-            String username=null;
-
-            //invoke System Under Test (sut)  
-            sut.open();
-            List<Ride> result = sut.getRidesByDriver(username);
-            sut.close();   
-            //verify the results
-            assertNull(result);
-        } catch (Exception e) {
-            fail();
         }
     }
 
