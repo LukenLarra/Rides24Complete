@@ -40,6 +40,7 @@ public class DataAccess {
 	private static final String DONOSTIA = "Donostia";
 	private static final String ACCEPTED = "Accepted";
 	private static final String REJECTED = "Rejected";
+	private static final String BOOKFREEZE = "BookFreeze";
 	private static final String USERNAME = "username";
 
 
@@ -158,11 +159,11 @@ public class DataAccess {
 			db.persist(book4);
 			db.persist(book5);
 
-			Movement m1 = new Movement(traveler1, "bookFreeze", 20);
-			Movement m2 = new Movement(traveler1, "bookFreeze", 40);
-			Movement m3 = new Movement(traveler1, "bookFreeze", 5);
-			Movement m4 = new Movement(traveler2, "bookFreeze", 4);
-			Movement m5 = new Movement(traveler1, "bookFreeze", 3);
+			Movement m1 = new Movement(traveler1, BOOKFREEZE, 20);
+			Movement m2 = new Movement(traveler1, BOOKFREEZE, 40);
+			Movement m3 = new Movement(traveler1, BOOKFREEZE, 5);
+			Movement m4 = new Movement(traveler2, BOOKFREEZE, 4);
+			Movement m5 = new Movement(traveler1, BOOKFREEZE, 3);
 			Movement m6 = new Movement(driver1, "Deposit", 15);
 			Movement m7 = new Movement(traveler1, "Deposit", 168);
 			
