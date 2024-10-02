@@ -27,7 +27,7 @@ import domain.Driver;
 import domain.Ride;
 
 @SuppressWarnings("unchecked")
-public class GetBookingFromDriverMockWhiteTest {
+public class GetBookingFromDriverMockBlackTest {
     
     static DataAccess sut;
 	
