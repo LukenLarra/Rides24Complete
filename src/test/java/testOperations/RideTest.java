@@ -9,7 +9,7 @@ public class RideTest {
 
 	static BLFacade appFacadeInterface = Mockito.mock(BLFacade.class);
 	
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		MainGUI a = new MainGUI();
 		MainGUI.setBussinessLogic(appFacadeInterface);
 		a.setVisible(true);
