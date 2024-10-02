@@ -12,10 +12,10 @@ import configuration.ConfigXML;
 
 import javax.swing.JTextArea;
 
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.WindowConstants;
 
 /**
  * It runs the database server as a separate process.
@@ -42,7 +42,7 @@ public class ObjectdbManagerServer extends JDialog {
 			
 			
 			ObjectdbManagerServer dialog = new ObjectdbManagerServer();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
