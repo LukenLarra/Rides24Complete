@@ -11,6 +11,8 @@ import javax.persistence.Persistence;
 import configuration.ConfigXML;
 import domain.Driver;
 import domain.Ride;
+import domain.Booking;
+import domain.Traveler;
 
 
 public class TestDataAccess {
@@ -109,6 +111,32 @@ public class TestDataAccess {
 				}
 				return null;
 	    }
+
+		public Driver addDriverWithRideAndBooking(String driverName, String from, String to, Date date, int nPlaces, float price, Traveler traveler, int seats) {
+			System.out.println(">> TestDataAccess: addDriverWithRideAndBooking");
+			Driver driver = null;
+			db.getTransaction().begin();
+			try {
+				driver = db.find(Driver.class, driverName);
+				if (driver == null) {
+					System.out.println("Entra en null");
+					driver = new Driver(driverName, null);
+					db.persist(driver);
+				}
+				Ride ride = driver.addRide(from, to, date, nPlaces, price);
+				Booking booking = new Booking(ride, traveler, seats);
+				ride.getBookings().add(booking);
+				traveler.addBookedRide(booking);
+				db.persist(booking);
+				db.getTransaction().commit();
+				System.out.println("Driver created " + driver);
+				return driver;
+			} catch (Exception e) {
+				e.printStackTrace();
+				db.getTransaction().rollback();
+			}
+			return null;
+		}
 		
 		
 		public boolean existRide(String name, String from, String to, Date date) {

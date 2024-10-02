@@ -11,6 +11,7 @@ import dataAccess.DataAccess;
 import domain.Driver;
 import domain.Ride;
 import domain.Booking;
+import domain.Traveler;
 import testOperations.TestDataAccess;
 
 public class GetBookingFromDriverBDWhiteTest {
@@ -29,7 +30,7 @@ public class GetBookingFromDriverBDWhiteTest {
         try {
 
             //define parameters
-            String driverUsername="DTest";
+            String driverUsername="Driver Test";
 
             sut.open();
             List<Booking> result =sut.getBookingFromDriver(driverUsername);
@@ -45,7 +46,7 @@ public class GetBookingFromDriverBDWhiteTest {
     @Test
     //sut.getBookingFromDriver:  The username fits a driver in the database but it doesnt have any ride. The test must return an empty list of bookings. If an Exception is returned the getBookingFromDriver method is not well implemented.
     public void test2() {
-        String username = "DTest";
+        String username = "Driver Test";
         try {
 
             // Inicializar la base de datos con datos de prueba
@@ -76,7 +77,7 @@ public class GetBookingFromDriverBDWhiteTest {
     @Test
     //sut.getBookingFromDriver:  The username fits a driver in the database and it has rides but no active ones. The test must return a list of empty bookings. If an Exception is returned the getBookingFromDriver method is not well implemented.
     public void test3() {
-        String username = "DTest";
+        String username = "Driver Test";
         String from = "Donostia";
         String to = "Zarautz";
         Date date = new java.util.Date();
@@ -115,16 +116,19 @@ public class GetBookingFromDriverBDWhiteTest {
     //sut.getBookingFromDriver:  The username fits a driver in the database and it has active rides. The test must return a list of bookings. If an Exception is returned the getBookingFromDriver method is not well implemented.
     public void test4() {
 
-        String username = "DTest";
+        String username = "Driver Test";
         String from = "Donostia";
         String to = "Zarautz";
         Date date = new java.util.Date();
+        Traveler traveler = new Traveler(username, "password");
         try {
 
             // Inicializar la base de datos con datos de prueba
             sut.open();
             testDA.open();
+            testDA.createDriver(username, "123"); // Añadir un conductor
             testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje activo
+            testDA.addDriverWithRideAndBooking(username, from, to, date, 2, 10, traveler, 1); // Añadir un viaje activo cn booking
             testDA.close();
 
             // Invoke System Under Test (sut)
