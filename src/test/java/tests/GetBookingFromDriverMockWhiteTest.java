@@ -26,6 +26,7 @@ import data_access.DataAccess;
 import domain.Booking;
 import domain.Driver;
 import domain.Ride;
+import domain.Traveler;
 
 @SuppressWarnings("unchecked")
 public class GetBookingFromDriverMockWhiteTest {
@@ -140,11 +141,14 @@ public class GetBookingFromDriverMockWhiteTest {
             String from = "Donostia";
             String to = "Zarautz";
             Date date = new java.util.Date();
+            Traveler traveler = new Traveler(username, "password");
             driver = new Driver(username, "123");
-            List<Ride> rides = new ArrayList<>();
-            Ride ride = new Ride(from, to, date, 3, 10.0, driver);
-            rides.add(ride);
-            driver.setCreatedRides(rides);
+
+            Ride ride = driver.addRide(from, to, date, 2, 10);
+            Booking booking = new Booking(ride, traveler, 1);
+            List<Booking> bookings = new java.util.ArrayList<Booking>();
+            bookings.add(booking);
+            ride.setBookings(bookings);
             
             Mockito.when(db.createQuery(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(query);		
             Mockito.when(query.getSingleResult()).thenReturn(driver);  // Simular que se ha encontrado un Driver con ese username

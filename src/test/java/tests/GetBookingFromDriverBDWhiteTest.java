@@ -128,7 +128,6 @@ public class GetBookingFromDriverBDWhiteTest {
             sut.open();
             testDA.open();
             testDA.createDriver(username, "123"); // Añadir un conductor
-            // testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje activo
             testDA.addDriverWithRideAndBooking(username, from, to, date, 2, 10, traveler, 1); // Añadir un viaje activo cn booking
             testDA.close();
 
