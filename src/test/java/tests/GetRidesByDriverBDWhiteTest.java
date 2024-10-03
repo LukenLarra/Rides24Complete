@@ -46,11 +46,11 @@ public class GetRidesByDriverBDWhiteTest {
         String username = "Driver Test";
         try {
             // Inicializar la base de datos con datos de prueba
-            sut.open();
             testDA.open();
             testDA.createDriver(username,"123"); // Añadir un conductor sin viajes
             testDA.close();
-
+            
+            sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
 
@@ -74,13 +74,13 @@ public class GetRidesByDriverBDWhiteTest {
         Date date = new java.util.Date();
         try {
             // Inicializar la base de datos con datos de prueba
-            sut.open();
             testDA.open();
             testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje no activo
             testDA.setActiveRide(false); // Desactivar el viaje
             testDA.close();
-
+            
             // Invoke System Under Test (sut)
+            sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
             // Verify the results
@@ -106,12 +106,12 @@ public class GetRidesByDriverBDWhiteTest {
         Date date = new java.util.Date();
         try {
             // Inicializar la base de datos con datos de prueba
-            sut.open();
             testDA.open();
             testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje activo
             testDA.close();
-
+            
             // Invoke System Under Test (sut)
+            sut.open();
             List<Ride> result = sut.getRidesByDriver(username);
             sut.close();
             // Verify the results
