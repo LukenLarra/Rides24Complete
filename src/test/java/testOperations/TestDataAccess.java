@@ -173,5 +173,51 @@ public class TestDataAccess {
 		}
 
 
+		public boolean existTraveler(String email) {
+			System.out.println(">> TestDataAccess: existTraveler");
+			return  db.find(Traveler.class, email)!=null;
+		}
+
+		public Traveler createTraveler(String name, String pass, float money) {
+			System.out.println(">> TestDataAccess: createTraveler");
+			Traveler traveler=null;
+				db.getTransaction().begin();
+				try {
+					traveler=new Traveler(name,pass);
+					traveler.setMoney(money);
+					db.persist(traveler);
+					db.getTransaction().commit();
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+				return traveler;
+	    }
+
+		public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverName) {
+			System.out.println(">> TestDataAccess: creatRide");
+			Driver driver = db.find(Driver.class, driverName);
+			if (driver != null) {
+				db.getTransaction().begin();
+				Ride ride = driver.addRide(from, to, date, nPlaces, price);
+				db.getTransaction().commit();
+				return ride;
+			}
+			return null;
+		}
+
+		public boolean removeTraveler(String name) {
+			System.out.println(">> TestDataAccess: removeTraveler");
+			Traveler t = db.find(Traveler.class, name);
+			if (t!=null) {
+				db.getTransaction().begin();
+				db.remove(t);
+				db.getTransaction().commit();
+				return true;
+			} else 
+			return false;
+		}	
+
+
 		
 }
