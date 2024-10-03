@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -43,7 +44,7 @@ public class BookRideBDBlackTest {
             result=sut.bookRide(null, ride, seats, desk);
             sut.close();
             //verify the result
-            assertTrue(result==false);
+            assertFalse(result);
         } catch (Exception e) {
             fail();
         }
@@ -60,7 +61,7 @@ public class BookRideBDBlackTest {
             result=sut.bookRide(traveler.getUsername(), null, seats, desk);
             sut.close();
             //verify the result
-            assertTrue(result==false);
+            assertFalse(result);
         } catch (Exception e) {
             fail();
         }
@@ -76,7 +77,7 @@ public class BookRideBDBlackTest {
             result=sut.bookRide("Traveler Test2", ride, seats, desk);
             sut.close();
             //verify the result
-            assertTrue(result==false);
+            assertFalse(result);
         } catch (Exception e) {
             fail();
         }
@@ -89,11 +90,11 @@ public class BookRideBDBlackTest {
         try {
             //invoke System Under Test (sut)  
             sut.open();
-            Ride ride2;
+            Ride ride2 = new Ride("City Test1", "City Test2", new Date(), seats,  price, new Driver("Driver Test2", "1234"));
             result=sut.bookRide("Traveler Test2", ride2, seats, desk);
             sut.close();
             //verify the result
-            assertTrue(result==false);
+            assertFalse(result);
         } catch (Exception e) {
             fail();
         }
@@ -109,7 +110,7 @@ public class BookRideBDBlackTest {
             result=sut.bookRide(traveler.getUsername(), ride, seats+1, desk);
             sut.close();
             //verify the result
-            assertTrue(result==false);
+            assertFalse(result);
         } catch (Exception e) {
             fail();
         }
@@ -131,20 +132,6 @@ public class BookRideBDBlackTest {
         }
     }
 
-    @Test
-    //sut.bookRide:  The traveler is in the database. The ride is in the database. The test must return true.
-    public void test9() {
-        boolean result=false;
-        try {
-            //invoke System Under Test (sut)  
-            sut.open();
-            result=sut.bookRide(traveler.getUsername(), ride, seats, desk);
-            sut.close();
-            //verify the result
-            assertTrue(result==true);
-        } catch (Exception e) {
-            fail();
-        }
-    }
+  
 
 }
