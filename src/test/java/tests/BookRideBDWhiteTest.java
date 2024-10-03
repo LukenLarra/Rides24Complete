@@ -72,7 +72,7 @@ public class BookRideBDWhiteTest {
             //invoke System Under Test (sut)  
             sut.open();
             testDA.open();
-            testDA.createTraveler(traveler.getUsername(), traveler.getPassword());
+            testDA.createTraveler(traveler);
             result=sut.bookRide(traveler.getUsername(), ride, seats+1, desk);
             sut.close();
             testDA.close();
@@ -100,7 +100,7 @@ public class BookRideBDWhiteTest {
             sut.open();
             testDA.open();
             traveler.setMoney(0);
-            testDA.createTraveler(traveler.getUsername(), traveler.getPassword());
+            testDA.createTraveler(traveler);
             result=sut.bookRide(traveler.getUsername(), ride, seats, 0);
             sut.close();
             testDA.close();
@@ -126,13 +126,15 @@ public class BookRideBDWhiteTest {
         boolean result=false;
         try {
             //invoke System Under Test (sut)  
-            sut.open();
+            traveler.setMoney(15);
             testDA.open();
-            testDA.createTraveler(traveler.getUsername(), traveler.getPassword(), 15);
+            testDA.createTraveler(traveler);
             testDA.addDriverWithRide("Driver Test", ride.getFrom(), ride.getTo(), ride.getDate(), ride.getnPlaces(), (float) ride.getPrice());
+            testDA.close();
+            sut.open();
             result=sut.bookRide(traveler.getUsername(), ride, seats, desk);
             sut.close();
-            testDA.close();
+            
             //verify the result
             assertTrue(result);
         } catch (Exception e) {

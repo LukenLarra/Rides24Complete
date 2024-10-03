@@ -181,13 +181,14 @@ public class TestDataAccess {
 			return  db.find(Traveler.class, email)!=null;
 		}
 
-		public Traveler createTraveler(String name, String pass, float money) {
+		public Traveler createTraveler(Traveler traveler) {
 			System.out.println(">> TestDataAccess: createTraveler");
-			Traveler traveler=null;
 				db.getTransaction().begin();
+				if (db.find(Traveler.class, traveler.getUsername())!=null) {
+					db.getTransaction().rollback();
+					return null;
+				}
 				try {
-					traveler=new Traveler(name,pass);
-					traveler.setMoney(money);
 					db.persist(traveler);
 					db.getTransaction().commit();
 				}
