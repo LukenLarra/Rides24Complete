@@ -9,9 +9,8 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import data_access.DataAccess;
-import domain.Driver;
-import domain.Ride;
 import domain.Booking;
+import domain.Driver;
 import domain.Traveler;
 import testOperations.TestDataAccess;
 
@@ -82,12 +81,13 @@ public class GetBookingFromDriverBDWhiteTest {
         String from = "Donostia";
         String to = "Zarautz";
         Date date = new java.util.Date();
+        Traveler traveler = new Traveler(username, "password");
         try {
 
             // Inicializar la base de datos con datos de prueba
             sut.open();
             testDA.open();
-            testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje no activo
+            testDA.addDriverWithRideAndBooking(username, from, to, date, 2, 10, traveler, 1); // Añadir un viaje no activo
             testDA.setActiveRide(false); // Desactivar el viaje
             testDA.close();
 
@@ -128,7 +128,7 @@ public class GetBookingFromDriverBDWhiteTest {
             sut.open();
             testDA.open();
             testDA.createDriver(username, "123"); // Añadir un conductor
-            testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje activo
+            // testDA.addDriverWithRide(username, from, to, date, 2, 10); // Añadir un viaje activo
             testDA.addDriverWithRideAndBooking(username, from, to, date, 2, 10, traveler, 1); // Añadir un viaje activo cn booking
             testDA.close();
 

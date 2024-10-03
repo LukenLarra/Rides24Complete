@@ -2,6 +2,7 @@ package testOperations;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -125,7 +126,9 @@ public class TestDataAccess {
 				}
 				Ride ride = driver.addRide(from, to, date, nPlaces, price);
 				Booking booking = new Booking(ride, traveler, seats);
-				ride.getBookings().add(booking);
+				List<Booking> bookings = new java.util.ArrayList<Booking>();
+				bookings.add(booking);
+				ride.setBookings(bookings);
 				traveler.addBookedRide(booking);
 				db.persist(booking);
 				db.getTransaction().commit();
