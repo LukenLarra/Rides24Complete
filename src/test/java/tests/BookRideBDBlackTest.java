@@ -107,15 +107,28 @@ public class BookRideBDBlackTest {
         try {
             //invoke System Under Test (sut)  
             sut.open();
+            testDA.open();
+            testDA.createTraveler(traveler);
             result=sut.bookRide(traveler.getUsername(), ride, seats+1, desk);
             sut.close();
+            testDA.close();
             //verify the result
             assertFalse(result);
         } catch (Exception e) {
             fail();
+        } finally {
+            try {
+                testDA.open();
+                testDA.removeTraveler(traveler.getUsername());
+                testDA.close();
+            } catch (Exception e) {
+                fail();
+            }
         }
     }
+       
 
+  
     @Test
     //sut.bookRide:  The traveler is in the database, the ride is not null, the number of seats left in the ride is greater than or equal to the number of seats requested by the traveler, but the price of the ride even with the discount is greater than the amount of money the traveler has. The test must return false.
     public void test8() {
@@ -123,12 +136,57 @@ public class BookRideBDBlackTest {
         try {
             //invoke System Under Test (sut)  
             sut.open();
+            testDA.open();
+            traveler.setMoney(0);
+            testDA.createTraveler(traveler);
             result=sut.bookRide(traveler.getUsername(), ride, seats, 0);
             sut.close();
+            testDA.close();
             //verify the result
-            assertTrue(result==false);
+            assertFalse(result);
         } catch (Exception e) {
             fail();
+        } finally {
+            try {
+                testDA.open();
+                testDA.removeTraveler(traveler.getUsername());
+                testDA.close();
+                traveler.setMoney(10);
+            } catch (Exception e) {
+                fail();
+            }
+        }   
+    }
+
+    @Test
+    //sut.bookRide:  The traveler is in the database, the ride is not null, the number of seats left in the ride is greater than or equal to the number of seats requested by the traveler, the price of the ride even with the discount is less than or equal to the amount of money the traveler has. The test must return true, but as the method is badly implemented an exception happens.
+    public void test5() {
+        boolean result=false;
+        try {
+            //invoke System Under Test (sut)  
+            traveler.setMoney(15);
+            testDA.open();
+            testDA.createTraveler(traveler);
+            testDA.addDriverWithRide("Driver Test", ride.getFrom(), ride.getTo(), ride.getDate(), ride.getnPlaces(), (float) ride.getPrice());
+            testDA.close();
+            sut.open();
+            result=sut.bookRide(traveler.getUsername(), ride, seats, desk);
+            sut.close();
+            
+            //verify the result
+            assertTrue(result);
+        } catch (Exception e) {
+            fail();
+        } finally {
+            try {
+                testDA.open();
+                testDA.removeTraveler(traveler.getUsername());
+                testDA.removeRide("Driver Test", ride.getFrom(), ride.getTo(), ride.getDate());
+                testDA.removeDriver("Driver Test");
+                testDA.close();
+            } catch (Exception e) {
+                fail();
+            }
         }
     }
 
