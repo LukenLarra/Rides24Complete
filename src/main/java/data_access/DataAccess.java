@@ -2,7 +2,10 @@ package data_access;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,6 +34,7 @@ import domain.Traveler;
 import domain.User;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
+import java.nio.file.Paths;
 
 /**
  * It implements the data access to the objectDb database
@@ -55,19 +59,16 @@ public class DataAccess {
 		if (c.isDatabaseInitialized()) {
 			String fileName = c.getDbFilename();
 
-			File fileToDelete = new File(fileName);
-			if (fileToDelete.delete()) {
-				File fileToDeleteTemp;
-                            fileToDeleteTemp = new File("$" + fileName);
-				try {
-					Files.delete(fileToDeleteTemp.toPath());
-					logger.info("Temporary file deleted");
-				} catch (IOException e) {
-					logger.info("Failed to delete temporary file");
-				}
+			Path filePath = Paths.get(fileName);
+			try {
+				Files.delete(filePath);
 				logger.info("File deleted");
-			} else {
-				logger.info("Operation failed");
+			} catch (NoSuchFileException e) {
+				logger.info("File does not exist");
+			} catch (DirectoryNotEmptyException e) {
+				logger.info("Directory is not empty");
+			} catch (IOException e) {
+				logger.info("Failed to delete file");
 			}
 		}
 		open();
