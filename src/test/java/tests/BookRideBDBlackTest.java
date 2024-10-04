@@ -69,7 +69,7 @@ public class BookRideBDBlackTest {
     
     @Test
     //sut.bookRide:  The traveler is not in the database. The test must return false.
-    public void test5() {
+    public void test3() {
         boolean result=false;
         try {
             //invoke System Under Test (sut)  
@@ -85,7 +85,7 @@ public class BookRideBDBlackTest {
 
     @Test
     //sut.bookRide:  The ride is not in the database. The test must return false.
-    public void test6() {
+    public void test4() {
         boolean result=false;
         try {
             //invoke System Under Test (sut)  
@@ -102,7 +102,7 @@ public class BookRideBDBlackTest {
 
     @Test
     //sut.bookRide:  The traveler is in the database, the ride is not null, the number of seats left in the ride is less than the number of seats requested by the traveler. The test must return false.
-    public void test7() {
+    public void test5() {
         boolean result=false;
         try {
             //invoke System Under Test (sut)  
@@ -131,7 +131,7 @@ public class BookRideBDBlackTest {
   
     @Test
     //sut.bookRide:  The traveler is in the database, the ride is not null, the number of seats left in the ride is greater than or equal to the number of seats requested by the traveler, but the price of the ride even with the discount is greater than the amount of money the traveler has. The test must return false.
-    public void test8() {
+    public void test6() {
         boolean result=false;
         try {
             //invoke System Under Test (sut)  
@@ -160,7 +160,7 @@ public class BookRideBDBlackTest {
 
     @Test
     //sut.bookRide:  The traveler is in the database, the ride is not null, the number of seats left in the ride is greater than or equal to the number of seats requested by the traveler, the price of the ride even with the discount is less than or equal to the amount of money the traveler has. The test must return true, but as the method is badly implemented an exception happens.
-    public void test5() {
+    public void test7() {
         boolean result=false;
         try {
             //invoke System Under Test (sut)  
