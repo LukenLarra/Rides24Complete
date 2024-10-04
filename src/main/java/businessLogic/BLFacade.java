@@ -1,26 +1,23 @@
 package businessLogic;
 
 import java.util.Date;
-
 import java.util.List;
-
-
-import domain.Ride;
-import domain.Traveler;
-import domain.User;
-//import domain.Admin;
-import domain.Alert;
-import domain.Booking;
-import domain.Car;
-import domain.Discount;
-import domain.Driver;
-import domain.Complaint;
-import domain.Movement;
-import exceptions.RideMustBeLaterThanTodayException;
-import exceptions.RideAlreadyExistException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+
+import domain.Alert;
+import domain.Booking;
+import domain.Car;
+import domain.Complaint;
+import domain.Discount;
+import domain.Driver;
+import domain.Movement;
+import domain.Ride;
+import domain.Traveler;
+import domain.User;
+import exceptions.RideAlreadyExistException;
+import exceptions.RideMustBeLaterThanTodayException;
 
 /**
  * Interface that specifies the business logic.

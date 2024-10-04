@@ -1,6 +1,5 @@
 package data_access;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
