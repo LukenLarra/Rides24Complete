@@ -9,7 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import java.util.logging.Logger;
 /**
  * It provides the configuration data from the "resources/config.xml" XML file
  */
@@ -110,7 +110,8 @@ public class ConfigXML {
 			  String dbOpenValue= ((Element)config.getElementsByTagName("database").item(0)).getAttribute("initialize");
 			  isDatabaseInitialized= dbOpenValue.equals("true");;
 
-	
+			  Logger logger = Logger.getLogger(getClass().getName());
+
 			  databaseNode = getTagValue("databaseNode", config);
 			  
 			  databasePort=Integer.parseInt(getTagValue("databasePort", config));
@@ -119,10 +120,10 @@ public class ConfigXML {
 				
 			  password=getTagValue("password", config);
 
-			  System.out.print("Read from config.xml: ");
-			  System.out.print("\t businessLogicLocal="+businessLogicLocal);
-			  System.out.print("\t databaseLocal="+databaseLocal);
-			  System.out.println("\t dataBaseInitialized="+isDatabaseInitialized); 
+			  logger.info("Read from config.xml: ");
+			  logger.info("\t businessLogicLocal="+businessLogicLocal);
+			  logger.info("\t databaseLocal="+databaseLocal);
+			  logger.info("\t dataBaseInitialized="+isDatabaseInitialized); 
 					  
 		  } catch (Exception e) {
 			System.out.println("Error in ConfigXML.java: problems with "+ configFile);
