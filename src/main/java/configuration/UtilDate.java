@@ -6,6 +6,9 @@ import java.util.TimeZone;
 
 public class UtilDate {
 
+	private UtilDate() {
+		// private constructor to hide the implicit public one
+	}
 	
 	public static Date trim(Date date) {
 
