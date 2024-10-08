@@ -393,8 +393,10 @@ public class DataAccess {
 		return travelerCount > 0 || driverCount > 0 || isAdmin;
 	}
 
+	private static final String DRIVER_QUERY = "SELECT d FROM Driver d WHERE d.username = :username";
+
 	public Driver getDriver(String erab) {
-		TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.username = :username", Driver.class);
+		TypedQuery<Driver> query = db.createQuery(DRIVER_QUERY, Driver.class);
 		query.setParameter(USERNAME, erab);
 		List<Driver> resultList = query.getResultList();
 		if (resultList.isEmpty()) {
@@ -415,17 +417,6 @@ public class DataAccess {
 			return resultList.get(0);
 		}
 	}
-
-	/*public Admin getAdmin(String erab) {
-		TypedQuery<Admin> query = db.createQuery("SELECT a FROM Admin a WHERE t.username = :username", Admin.class);
-		query.setParameter(USERNAME, erab);
-		List<Admin> resultList = query.getResultList();
-		if (resultList.isEmpty()) {
-			return null;
-		} else {
-			return resultList.get(0);
-		}
-	}*/
 
 	public String getMotabyUsername(String erab) {
 		TypedQuery<String> driverQuery = db.createQuery("SELECT d.mota FROM Driver d WHERE d.username = :username",
