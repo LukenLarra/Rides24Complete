@@ -5,25 +5,20 @@ package businessLogic;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import configuration.ConfigXML;
-
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.xml.ws.Endpoint;
 
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.logging.Logger;
+import configuration.ConfigXML;
 
 /**
  * It runs the business logic server as a separate process.
@@ -49,7 +44,15 @@ public class BusinessLogicServer extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	
+		}
+		private void initializeTextArea() {
+		textArea = new JTextArea();
+		contentPanel.add(textArea);
+		}
+	
+
+	
 
 
 	public BusinessLogicServer() {
@@ -60,15 +63,9 @@ public class BusinessLogicServer extends JDialog {
 			}
 		});
 		setTitle("BusinessLogicServer: running the business logic");
-		setBounds(100, 100, 486, 209);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			textArea = new JTextArea();
-			contentPanel.add(textArea);
-		}
+		
+		initializeTextArea();
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -132,6 +129,8 @@ public class BusinessLogicServer extends JDialog {
 	  }
 	}
 }
+
+
 
 
 
