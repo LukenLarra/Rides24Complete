@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 import domain.Discount;
 
 import java.util.ResourceBundle;

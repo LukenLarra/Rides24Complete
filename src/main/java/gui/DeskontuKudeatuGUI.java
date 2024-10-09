@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 import domain.Discount;
 
 public class DeskontuKudeatuGUI extends JFrame {

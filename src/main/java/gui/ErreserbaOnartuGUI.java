@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 import domain.Booking;
 import domain.Ride;
 import domain.Traveler;

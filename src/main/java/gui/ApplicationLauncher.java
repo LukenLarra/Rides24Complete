@@ -7,10 +7,10 @@ import javax.swing.UIManager;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import business_logic.BLFacade;
+import business_logic.BLFacadeImplementation;
 import configuration.ConfigXML;
 import data_access.DataAccess;
-import businessLogic.BLFacade;
-import businessLogic.BLFacadeImplementation;
 
 public class ApplicationLauncher {
 

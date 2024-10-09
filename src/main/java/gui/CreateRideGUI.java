@@ -13,7 +13,7 @@ import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 import configuration.UtilDate;
 import domain.Car;
 import domain.Driver;

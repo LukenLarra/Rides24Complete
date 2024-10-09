@@ -1,7 +1,7 @@
 package gui;
 
 import javax.swing.*;
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

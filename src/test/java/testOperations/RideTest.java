@@ -2,7 +2,7 @@ package testOperations;
 
 import org.mockito.Mockito;
 
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 import gui.MainGUI;
 
 public class RideTest {

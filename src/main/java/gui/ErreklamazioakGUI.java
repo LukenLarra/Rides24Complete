@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 import domain.Booking;
 import javax.swing.JLabel;
 import javax.swing.JButton;

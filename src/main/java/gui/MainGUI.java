@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
-import businessLogic.BLFacade;
+import business_logic.BLFacade;
 
 
 public class MainGUI extends JFrame {
