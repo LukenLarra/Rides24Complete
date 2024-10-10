@@ -29,7 +29,7 @@ import domain.Ride;
 @SuppressWarnings("unchecked")
 public class GetRidesByDriverMockWhiteTest {
     
-   /* static DataAccess sut;
+    static DataAccess sut;
 	
 	protected MockedStatic<Persistence> persistenceMock;
 
@@ -158,5 +158,5 @@ public class GetRidesByDriverMockWhiteTest {
             fail();
         }
     }
-    */
+
 }
