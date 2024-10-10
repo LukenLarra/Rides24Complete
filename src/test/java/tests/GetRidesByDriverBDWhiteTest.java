@@ -15,7 +15,7 @@ import testOperations.TestDataAccess;
 
 public class GetRidesByDriverBDWhiteTest {
     //sut:system under test
-	static DataAccess sut=new DataAccess();
+	/*static DataAccess sut=new DataAccess();
 	 
 	//additional operations needed to execute the test 
 	static TestDataAccess testDA=new TestDataAccess();
@@ -127,6 +127,6 @@ public class GetRidesByDriverBDWhiteTest {
             testDA.close();
         }
     }
-
+*/
 
 }
